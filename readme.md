@@ -26,6 +26,10 @@ The service starts on `http://localhost:8080`. The H2 console is also available 
 
 These accounts are created automatically every time the application boots.
 
+### Public hello endpoint
+
+`GET /api/hello` is an unauthenticated health-style endpoint that returns a simple JSON greeting.
+
 ## Authentication flow
 
 1. **Obtain a token**
