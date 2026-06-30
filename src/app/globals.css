@@ -1,0 +1,29 @@
+:root {
+  --button-gap: 4px;
+  --button-padding: 10px 16px;
+  --button-radius: 9999px;
+  --button-color: rgba(255, 255, 255, 0.9);
+  --foreground: #f0f0f0;
+  --background: #0a0a0a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}

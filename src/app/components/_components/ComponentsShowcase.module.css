@@ -1,0 +1,43 @@
+.showcase {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .showcase {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+.example {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.example h2 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.exampleContent {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
