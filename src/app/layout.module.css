@@ -1,0 +1,35 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-6);
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navLink {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.navLink:hover {
+  color: var(--color-text);
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-6);
+}
