@@ -33,16 +33,11 @@ build/
 .vscode/
 
 ### Next.js ###
+node_modules/
 .next/
 out/
-node_modules/
-npm-debug.log*
+coverage/
+*.local
 .env*.local
-next-env.d.ts
-
-### Playwright ###
 test-results/
 playwright-report/
-
-### Vitest ###
-coverage/
