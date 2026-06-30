@@ -1,0 +1,134 @@
+.single,
+.segment {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  box-shadow: var(--shadow-glass);
+  color: var(--color-text);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  outline: none;
+}
+
+.single:hover:not(:disabled),
+.segment:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.single:active:not(:disabled),
+.segment:active:not(:disabled) {
+  background: var(--color-surface-active);
+  transform: scale(0.98);
+}
+
+.single:focus-visible,
+.segment:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.single:disabled,
+.segment:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.selected,
+.segmentSelected {
+  background: var(--color-surface-selected);
+  box-shadow: var(--shadow-selected);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+@supports not (backdrop-filter: blur(2px)) {
+  .single,
+  .segment {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(40, 40, 55, 0.88);
+  }
+
+  .selected,
+  .segmentSelected {
+    background: rgba(70, 70, 90, 0.95);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.segmented {
+  display: inline-flex;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: var(--blur-glass);
+  -webkit-backdrop-filter: var(--blur-glass);
+  gap: 1px;
+}
+
+@supports not (backdrop-filter: blur(2px)) {
+  .segmented {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(30, 30, 45, 0.92);
+  }
+}
+
+.segmented .segment {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: transparent;
+}
+
+.segmented .segment:first-child {
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+}
+
+.segmented .segment:last-child {
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+}
+
+.segmented .segment:only-child {
+  border-radius: var(--radius-pill);
+}
+
+.segmented .segment:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: -2px;
+}
+
+.segmented .segmentSelected {
+  background: var(--color-surface-selected);
+  box-shadow: var(--shadow-selected);
+}
