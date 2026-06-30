@@ -103,7 +103,8 @@ test.describe('LiquidGlassButton — segmented variant', () => {
   test('segmented variant renders at least 2 options', async ({ page }) => {
     const group = page.locator('[data-testid="liquid-glass-button"][data-variant="segmented"]').first()
     const segments = group.locator('[data-testid="liquid-glass-segment"]')
-    await expect(segments).toHaveCount(2)
+    const count = await segments.count()
+    expect(count).toBeGreaterThanOrEqual(2)
   })
 
   test('exactly one segment has data-selected="true"', async ({ page }) => {
