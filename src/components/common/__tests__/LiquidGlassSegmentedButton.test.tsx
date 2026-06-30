@@ -7,7 +7,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LiquidGlassSegmentedButton from '../LiquidGlassSegmentedButton'
 
@@ -206,6 +206,97 @@ describe('AC8: group role and keyboard accessibility', () => {
     expect(screen.getByTestId('lgb-seg-cmd')).toBeInTheDocument()
     expect(screen.getByTestId('lgb-seg-inbox')).toBeInTheDocument()
     expect(screen.getByTestId('lgb-seg-settings')).toBeInTheDocument()
+  })
+})
+
+// ---------------------------------------------------------------------------
+// AC8 (keyboard) — Enter and Space activate segments; disabled segments are guarded
+// ---------------------------------------------------------------------------
+describe('AC8: keyboard activation of segments', () => {
+  it('calls onSelect with segment id when Enter is pressed on a focused segment', async () => {
+    const user = userEvent.setup()
+    const onSelect = vi.fn()
+    render(
+      <LiquidGlassSegmentedButton
+        segments={THREE_SEGMENTS}
+        selectedId="cmd"
+        onSelect={onSelect}
+        ariaLabel="Navigation"
+      />
+    )
+    screen.getByRole('button', { name: 'Inbox' }).focus()
+    await user.keyboard('{Enter}')
+    expect(onSelect).toHaveBeenCalledWith('inbox')
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('calls onSelect with segment id when Space is pressed on a focused segment', async () => {
+    const user = userEvent.setup()
+    const onSelect = vi.fn()
+    render(
+      <LiquidGlassSegmentedButton
+        segments={THREE_SEGMENTS}
+        selectedId="cmd"
+        onSelect={onSelect}
+        ariaLabel="Navigation"
+      />
+    )
+    screen.getByRole('button', { name: 'Inbox' }).focus()
+    await user.keyboard(' ')
+    expect(onSelect).toHaveBeenCalledWith('inbox')
+    expect(onSelect).toHaveBeenCalledTimes(1)
+  })
+
+  it('does NOT call onSelect when Enter is pressed on a disabled segment', () => {
+    const onSelect = vi.fn()
+    const segsWithDisabled = [
+      { id: 'cmd', label: 'Command' },
+      { id: 'inbox', label: 'Inbox', disabled: true },
+    ]
+    render(
+      <LiquidGlassSegmentedButton
+        segments={segsWithDisabled}
+        selectedId="cmd"
+        onSelect={onSelect}
+        ariaLabel="Navigation"
+      />
+    )
+    fireEvent.keyDown(screen.getByTestId('lgb-seg-inbox'), { key: 'Enter' })
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it('does NOT call onSelect when Space is pressed on a disabled segment', () => {
+    const onSelect = vi.fn()
+    const segsWithDisabled = [
+      { id: 'cmd', label: 'Command' },
+      { id: 'inbox', label: 'Inbox', disabled: true },
+    ]
+    render(
+      <LiquidGlassSegmentedButton
+        segments={segsWithDisabled}
+        selectedId="cmd"
+        onSelect={onSelect}
+        ariaLabel="Navigation"
+      />
+    )
+    fireEvent.keyDown(screen.getByTestId('lgb-seg-inbox'), { key: ' ' })
+    expect(onSelect).not.toHaveBeenCalled()
+  })
+
+  it('does NOT call onSelect for non-activation keys (e.g. ArrowRight)', async () => {
+    const user = userEvent.setup()
+    const onSelect = vi.fn()
+    render(
+      <LiquidGlassSegmentedButton
+        segments={THREE_SEGMENTS}
+        selectedId="cmd"
+        onSelect={onSelect}
+        ariaLabel="Navigation"
+      />
+    )
+    screen.getByRole('button', { name: 'Inbox' }).focus()
+    await user.keyboard('{ArrowRight}')
+    expect(onSelect).not.toHaveBeenCalled()
   })
 })
 
