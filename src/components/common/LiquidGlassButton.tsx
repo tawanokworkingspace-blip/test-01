@@ -51,7 +51,7 @@ export default function LiquidGlassButton({
       aria-pressed={selected}
       aria-disabled={disabled}
       disabled={disabled}
-      data-selected={selected ? 'true' : undefined}
+      data-selected={selected ? 'true' : 'false'}
       className={rootClass}
       onClick={handleClick}
       onKeyDown={handleKeyDown}

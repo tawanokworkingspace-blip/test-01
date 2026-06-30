@@ -60,7 +60,7 @@ export default function LiquidGlassSegmentedButton({
             aria-pressed={isSelected}
             aria-disabled={seg.disabled}
             disabled={seg.disabled}
-            data-selected={isSelected ? 'true' : undefined}
+            data-selected={isSelected ? 'true' : 'false'}
             className={segClass}
             onClick={() => !seg.disabled && onSelect(seg.id)}
             onKeyDown={(e) => handleKeyDown(e, seg.id, seg.disabled)}
